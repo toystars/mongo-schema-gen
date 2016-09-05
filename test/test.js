@@ -2,7 +2,7 @@
 
 var expect = require('chai').expect;
 var schemaGen = require('../index');
-var mongoUrl = process.env.NODE_ENV ? 'mongodb://toystars:mongo-schema-gen@ds019756.mlab.com:19756/mongo-schema-gen-test' : 'mongodb://localhost:27017/mongo-schema-gen';
+var mongoUrl = 'mongodb://localhost:27017/mongo-schema-gen';
 
 
 
