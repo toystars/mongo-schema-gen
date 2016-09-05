@@ -1,3 +1,12 @@
+/*!
+ * mongo-schema-gen/test
+ * Copyright(c) 2016 Mustapha Babatunde Oluwaleke
+ * MIT Licensed
+ */
+
+
+
+
 'use strict';
 
 var expect = require('chai').expect;
@@ -97,6 +106,45 @@ describe('#getKeys()', function () {
   it('should return all keys used in collection as an array of strings', function (done) {
     schemaGen.getKeys('users', function (keys) {
       expect(keys).to.have.lengthOf(5);
+      done();
+    });
+  });
+
+});
+
+
+describe('#keyUsed()', function () {
+
+  before(function (done) {
+    if (!schemaGen.isConnected()) {
+      schemaGen.connect(mongoUrl, function (db) {
+        var Packages = db.collection('packages');
+        Packages.insertOne({
+          name: 'mongo-schema-gen',
+          purpose: 'Simple mongoDB collections schema generator'
+        });
+        done();
+      });
+    }
+  });
+
+  after(function () {
+    var db = schemaGen.getDB();
+    var Packages = db.collection('packages');
+    Packages.remove({});
+    schemaGen.disconnect();
+  });
+
+  it('should return true when key is used as field in collection', function (done) {
+    schemaGen.keyUsed('packages', 'purpose', function (status) {
+      expect(status).to.be.true;
+      done();
+    });
+  });
+
+  it('should return false when key is not used as field in collection', function (done) {
+    schemaGen.keyUsed('packages', 'stars', function (status) {
+      expect(status).to.be.false;
       done();
     });
   });
