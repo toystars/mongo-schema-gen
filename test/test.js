@@ -86,8 +86,9 @@ describe('#getKeys()', function () {
           age: 26,
           job: 'Software Engineer',
           dob: new Date
+        }, function (error, result) {
+          done();
         });
-        done();
       });
     }
   });
@@ -122,8 +123,9 @@ describe('#keyUsed()', function () {
         Packages.insertOne({
           name: 'mongo-schema-gen',
           purpose: 'Simple mongoDB collections schema generator'
+        }, function (error, result) {
+          done();
         });
-        done();
       });
     }
   });
@@ -169,8 +171,9 @@ describe('#getSchema()', function () {
           purpose: 'Simple mongoDB collections schema generator',
           forks: 99000,
           contributors: 8727373
-        }]);
-        done();
+        }], function (error, result) {
+          done();
+        });
       });
     }
   });
@@ -219,8 +222,9 @@ describe('#stats()', function () {
           purpose: 'Simple mongoDB collections schema generator',
           forks: 99000,
           contributors: 8727373
-        }]);
-        done();
+        }], function (error, result) {
+          done();
+        });
       });
     }
   });
