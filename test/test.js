@@ -151,3 +151,51 @@ describe('#keyUsed()', function () {
 
 });
 
+
+describe('#getSchema()', function () {
+
+  before(function (done) {
+    if (!schemaGen.isConnected()) {
+      schemaGen.connect(mongoUrl, function (db) {
+        var Packages = db.collection('packages');
+        Packages.insertMany([{
+          name: 'mongo-schema-gen',
+          purpose: 'Simple mongoDB collections schema generator',
+          stars: 125000,
+          forks: 99000,
+          createdDate: new Date
+        }, {
+          name: 'mongo-schema-gen',
+          purpose: 'Simple mongoDB collections schema generator',
+          forks: 99000,
+          contributors: 8727373
+        }]);
+        done();
+      });
+    }
+  });
+
+  after(function () {
+    var db = schemaGen.getDB();
+    var Packages = db.collection('packages');
+    Packages.remove({});
+    schemaGen.disconnect();
+  });
+
+  it('should return schema blue-print as an array of objects', function (done) {
+    schemaGen.getSchema('packages', function (schemaArray) {
+      expect(schemaArray).to.contain.all.keys({
+        _id: { type: 'object' },
+        name: { type: 'string' },
+        purpose: { type: 'string' },
+        stars: { type: 'number' },
+        forks: { type: 'number' },
+        createdDate: { type: 'date' },
+        contributors: { type: 'number' }
+      });
+      done();
+    });
+  });
+
+});
+
