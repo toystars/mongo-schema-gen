@@ -199,3 +199,58 @@ describe('#getSchema()', function () {
 
 });
 
+
+
+
+describe('#stats()', function () {
+
+  before(function (done) {
+    if (!schemaGen.isConnected()) {
+      schemaGen.connect(mongoUrl, function (db) {
+        var Packages = db.collection('packages');
+        Packages.insertMany([{
+          name: 'mongo-schema-gen',
+          purpose: 'Simple mongoDB collections schema generator',
+          stars: 125000,
+          forks: 99000,
+          createdDate: new Date
+        }, {
+          name: 'mongo-schema-gen',
+          purpose: 'Simple mongoDB collections schema generator',
+          forks: 99000,
+          contributors: 8727373
+        }]);
+        done();
+      });
+    }
+  });
+
+  after(function () {
+    var db = schemaGen.getDB();
+    var Packages = db.collection('packages');
+    Packages.remove({});
+    schemaGen.disconnect();
+  });
+
+  it('should return stats of specified collection', function (done) {
+    schemaGen.stats('packages', function (stat) {
+      expect(stat).to.contain.all.keys({
+        ns: 'mongo-schema-gen.packages',
+        count: 2,
+        size: 4,
+        avgObjSize: 240,
+        numExtents: 1,
+        storageSize: 80,
+        userFlags: 1,
+        capped: false,
+        indexDetails: {},
+        totalIndexSize: 80,
+        indexSizes: { _id_: 80 },
+        ok: 1 }
+      );
+      done();
+    });
+  });
+
+});
+
