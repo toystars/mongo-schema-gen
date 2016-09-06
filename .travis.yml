@@ -8,3 +8,9 @@ install:
 
 script:
   - npm test
+
+services:
+  - mongodb
+
+before_script:
+  - sleep 20
