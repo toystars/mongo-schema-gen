@@ -1,5 +1,5 @@
 # mongo-schema-gen 
-[![Build Status](https://travis-ci.org/toystars/mongo-schema-gen.svg?branch=master)](https://travis-ci.org/toystars/mongo-schema-gen) [![npm](https://img.shields.io/mongo-schema-gen/v/npm.svg)](https://www.npmjs.com/package/mongo-schema-gen) [![Downloads](https://img.shields.io/mongo-schema-gen/dt/express.svg)](https://www.npmjs.com/package/mongo-schema-gen) [![Licence](https://img.shields.io/mongo-schema-gen/l/express.svg)](https://www.npmjs.com/package/mongo-schema-gen)
+[![Build Status](https://travis-ci.org/toystars/mongo-schema-gen.svg?branch=master)](https://travis-ci.org/toystars/mongo-schema-gen) [![npm](https://img.shields.io/npm/v/mongo-schema-gen.svg)](https://www.npmjs.com/package/mongo-schema-gen) [![Downloads](https://img.shields.io/npm/dt/mongo-schema-gen.svg)](https://www.npmjs.com/package/mongo-schema-gen) [![Licence](https://img.shields.io/npm/l/mongo-schema-gen.svg)](https://www.npmjs.com/package/mongo-schema-gen)
 
 > Simple mongoDB collection schema generator
 
